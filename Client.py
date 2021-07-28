@@ -34,7 +34,7 @@ def takeScreen():
     file_size = s.recv(4)
     file_size = struct.unpack('>I', file_size)[0]  # convert `4 bytes` to `integer`
     return file_size
-def save_img(w_child):
+def save_img():
     file_size = takeScreen()
     path=asksaveasfilename()
     file_handler = open(path, "wb")
@@ -53,7 +53,7 @@ def w_takeScreen():
     w_child.title("Screenshot")
     w_child.geometry("100x100")
     #add Button
-    button_save = tk.Button(w_child,text="Save", command= lambda : save_img(w_child))
+    button_save = tk.Button(w_child,text="Save", command= lambda : save_img)
     button_save.grid(row=1, column=1)
 
 # ========================Kết thúc chụp màn hình==========================
