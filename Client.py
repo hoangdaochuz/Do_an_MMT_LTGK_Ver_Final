@@ -26,6 +26,7 @@ def ConnectToServer():
         tkinter.messagebox.showinfo(title="Thông báo", message="Đã kết nối tới server thành công")
 
 #============================ Chụp màn hình===========================
+
 def takeScreen():
     msg = "TAKEPIC"
     print('[take_screen] send command:', msg)
