@@ -28,34 +28,33 @@ def ConnectToServer():
 #============================ Chụp màn hình===========================
 def takeScreen():
     msg = "TAKEPIC"
-
     print('[take_screen] send command:', msg)
     s.sendall(msg.encode())
-
     file_size = s.recv(4)
     file_size = struct.unpack('>I', file_size)[0]  # convert `4 bytes` to `integer`
-    print('[take_screen] file size:', file_size)
-
-    print('[take_screen] open file')
-    file_handler = open('server_image.jpg', "wb")
-
+    return file_size
+def save_img(w_child):
+    file_size = takeScreen()
+    path=asksaveasfilename()
+    file_handler = open(path, "wb")
     total_size = 0
     while total_size < file_size:
-        print('[take_screen] recv data chunk')
         data_chunk = s.recv(2048)
-
         size = len(data_chunk)
-
         total_size += size
-        print('[handle_client] write data chunk:', size, 'total:', total_size)
         file_handler.write(data_chunk)
-
-    print('[take_screen] close file')
     file_handler.close()
-
     tkinter.messagebox.showinfo(title="Success", message="Downloaded Successfully")
-    im = Image.open('server_image.jpg')
+    im = Image.open(path)
     im.show()
+def w_takeScreen():
+    w_child = Toplevel(root)
+    w_child.title("Screenshot")
+    w_child.geometry("100x100")
+    #add Button
+    button_save = tk.Button(w_child,text="Save", command= lambda : save_img(w_child))
+    button_save.grid(row=1, column=1)
+
 # ========================Kết thúc chụp màn hình==========================
 
 
@@ -383,7 +382,7 @@ entry = tk.Entry()
 entry.grid(row=1, column=1)
 myButton_connect = tk.Button(text="Connect", command=ConnectToServer)
 myButton_connect.grid(row=1, column=2)
-myButton_TakePic = tk.Button(text="Take screenshot", command=takeScreen, font=10)
+myButton_TakePic = tk.Button(text="Take screenshot", command=w_takeScreen, font=10)
 myButton_TakePic.grid(row=2, column=1)
 myButton_Process = tk.Button(text="Process Running", command=my_open, font=10)
 myButton_Process.grid(row=3, column=1)
