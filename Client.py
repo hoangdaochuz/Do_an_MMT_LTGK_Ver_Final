@@ -53,7 +53,7 @@ def w_takeScreen():
     w_child.title("Screenshot")
     w_child.geometry("100x100")
     #add Button
-    button_save = tk.Button(w_child,text="Save", command= lambda : save_img)
+    button_save = tk.Button(w_child,text="Save", command= lambda : save_img())
     button_save.grid(row=1, column=1)
 
 # ========================Kết thúc chụp màn hình==========================
@@ -122,14 +122,17 @@ def w_Xem(my_w_child,tree):
 
     tree.grid(row=5, columnspan=4, sticky='nsew')
     # generate sample data
+    list_process = []
     i = 0
+    list_process.clear()
     while True:
         recv_proc = s.recv(1024).decode("utf8")
         if recv_proc == "done":
             break
-        tree.insert('', 'end', iid=i, text="Item_" + str(i), values=(recv_proc))
-        i = i + 1
-
+        list_process.append(recv_proc)
+    for item in list_process:
+        tree.insert(parent='', index='end', text="Item_" + str(i), values=(item))
+        i=i+1
 def Xoa_table(tree):
     for i in tree.get_children():
         tree.delete(i)
