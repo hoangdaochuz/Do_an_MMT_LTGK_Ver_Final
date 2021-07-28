@@ -87,6 +87,8 @@ def createKey(conn, new_key, subkey, keyCre):
         conn.sendall(bytes(msg, "utf-8"))
     except Exception as e:
         print(e)
+        msg = "Lỗi"
+        conn.sendall(bytes(msg, "utf-8"))
 
 
 def getValue(path, name, start_key=None):
@@ -119,6 +121,7 @@ def setValue(conn, key, subkey, nameValue, value, typeValue):
         msg = "Set value thành công"
         conn.send(bytes(msg, "utf-8"))
     except Exception as e:
+        print(e)
         msg = "Lỗi"
         conn.send(bytes(msg, "utf-8"))
 
@@ -131,6 +134,8 @@ def deleteKey(conn, new_key, subkey):
         conn.sendall(bytes(msg, "utf-8"))
     except Exception as e:
         print(e)
+        msg = "Lỗi"
+        conn.sendall(bytes(msg, "utf-8"))
 
 
 def deleteValue(conn, new_key, subkey, nameValue):
@@ -140,6 +145,7 @@ def deleteValue(conn, new_key, subkey, nameValue):
         msg = "Delete value thành công"
         conn.sendall(bytes(msg, "utf-8"))
     except Exception as e:
+        print(e)
         msg = "Lỗi"
         conn.sendall(bytes(msg, "utf-8"))
 
