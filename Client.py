@@ -51,7 +51,7 @@ def save_img():
 def w_takeScreen():
     w_child = Toplevel(root)
     w_child.title("Screenshot")
-    w_child.geometry("100x100")
+    w_child.geometry("200x100")
     #add Button
     button_save = tk.Button(w_child,text="Save", command= lambda : save_img())
     button_save.grid(row=1, column=1)
@@ -148,7 +148,7 @@ def my_open():
     msg = "app running"
     s.sendall(bytes(msg, "utf8"))
     my_w_child = Toplevel(root)
-    my_w_child.geometry("900x300")
+    my_w_child.geometry("1200x300")
     my_w_child.title("Process running")
     tree = ttk.Treeview(my_w_child, columns=columns)
     # add button
