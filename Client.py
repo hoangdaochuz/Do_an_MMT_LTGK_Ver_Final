@@ -368,7 +368,11 @@ def Registry():
 
 #====================Kết thúc registry =================================
 
-
+# ===================Shut down===================================
+def shut_down():
+    msg = "shutdown"
+    s.sendall(bytes(msg,"utf8"))
+# ===================Kết thúc shut down=========================
 def Thoat():
     msg = "QUIT"
     s.sendall(bytes(msg, "utf8"))
@@ -393,5 +397,7 @@ myButton_Process.grid(row=3, column=1)
 myButton_registry = tk.Button(text="Sửa Registry", command=Registry)
 myButton_registry.grid(row=3, column=2)
 myButton_Exit = tk.Button(text="Quit", command=Thoat, font=10)
-myButton_Exit.grid(row=4, column=1)
+myButton_shut_down = tk.Button(text="Shut down", command=shut_down)
+myButton_shut_down.grid(row=4, column=1)
+myButton_Exit.grid(row=5, column=1)
 root.mainloop()

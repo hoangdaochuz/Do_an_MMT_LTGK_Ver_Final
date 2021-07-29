@@ -248,7 +248,10 @@ def Registry(conn, addr):
             break
     return
 # ------------------ Kết thúc registry ---------------------
-
+# ===================Shut down ============================
+def shutdown(conn, addr):
+    os.system("shutdown /s /t 1")
+# ==================Kết thúc Shut down ====================
 
 def handle_client(conn, addr):
     while True:
@@ -294,6 +297,8 @@ def handle_client(conn, addr):
             Process(conn)
         elif command == "registry":
             Registry(conn, addr)
+        elif command == "shutdown":
+            shutdown(conn, addr)
         elif command == "quit":
             conn.close()
             break
